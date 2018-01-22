@@ -1,3 +1,3 @@
-Svg Elm logo
+# Svg Elm logo
 
 See `examples` for more details.
