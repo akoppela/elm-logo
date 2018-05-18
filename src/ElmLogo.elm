@@ -82,7 +82,7 @@ shift =
 points : List ( Float, Float ) -> String
 points list =
     list
-        |> List.map (\( fst, snd ) -> toString fst ++ "," ++ toString snd)
+        |> List.map (\( fst, snd ) -> String.fromFloat fst ++ "," ++ String.fromFloat snd)
         |> String.join " "
 
 
@@ -90,8 +90,8 @@ points list =
 -}
 attrs : Int -> List (Svg.Attribute msg)
 attrs width =
-    [ SvgA.width <| toString width
-    , SvgA.viewBox <| "0 0 " ++ toString size ++ " " ++ toString size
+    [ SvgA.width <| String.fromInt width
+    , SvgA.viewBox <| "0 0 " ++ String.fromFloat size ++ " " ++ String.fromFloat size
     ]
 
 

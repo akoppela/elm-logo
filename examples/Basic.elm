@@ -1,6 +1,5 @@
 module Basic exposing (main)
 
-import Color
 import Element as E
 import Element.Background as Background
 import ElmLogo
@@ -12,7 +11,7 @@ import Svg.Attributes as SvgA
 
 main : Html msg
 main =
-    H.div [ HtmlA.style [ ( "padding", "50px" ) ] ]
+    H.div [ HtmlA.style "padding" "50px" ]
         [ H.h1 [] [ H.text "Html example:" ]
         , ElmLogo.html 100
         , H.h1 [] [ H.text "Svg example:" ]
@@ -22,5 +21,5 @@ main =
             ]
             [ ElmLogo.svg 100 ]
         , H.h1 [] [ H.text "Style Elements example:" ]
-        , E.layout [ Background.color Color.white ] <| E.el [ E.alignLeft ] <| ElmLogo.element 100
+        , E.layout [] (E.el [ E.alignLeft ] (ElmLogo.element 100))
         ]
