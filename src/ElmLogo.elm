@@ -1,13 +1,13 @@
-module ElmLogo exposing (element, html, svg)
+module ElmLogo exposing (svg, html, element)
 
 {-| This library provides SVG Elm logos to use with various libraries,
-such as [Svg][svg], [Html][html] or [Style Elements][style-elements].
+such as [Svg][svg], [Html][html] or [Elm UI][elm-ui].
 
 All functions accept integer as first argument to set width of logo.
 
-[svg]: http://package.elm-lang.org/packages/elm-lang/svg/latest
-[html]: http://package.elm-lang.org/packages/elm-lang/html/latest
-[style-elements]: http://package.elm-lang.org/packages/mdgriffith/stylish-elephants/latest
+[svg]: https://package.elm-lang.org/packages/elm/svg/latest/
+[html]: https://package.elm-lang.org/packages/elm/html/latest/
+[elm-ui]: https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/
 
 
 # Functions
@@ -16,15 +16,15 @@ All functions accept integer as first argument to set width of logo.
 
 -}
 
-import Element as E exposing (Element)
+import Element exposing (Element)
 import Html exposing (Html)
 import Svg exposing (Svg)
-import Svg.Attributes as SvgA
+import Svg.Attributes as SvgAttrs
 
 
 {-| Elm logo which can be embedded into [SVG][svg]
 
-[svg]: http://package.elm-lang.org/packages/elm-lang/svg/latest
+[svg]: https://package.elm-lang.org/packages/elm/svg/latest/
 
 -}
 svg : Int -> Svg msg
@@ -34,7 +34,7 @@ svg width =
 
 {-| Elm logo which can be embedded into [HTML][html]
 
-[html]: http://package.elm-lang.org/packages/elm-lang/html/latest
+[html]: https://package.elm-lang.org/packages/elm/html/latest/
 
 -}
 html : Int -> Html msg
@@ -42,14 +42,14 @@ html width =
     Svg.svg (attrs width) group
 
 
-{-| Elm logo which can be embedded into [Style Element][style-elements]
+{-| Elm logo which can be embedded into [Elm UI][elm-ui] view
 
-[style-elements]: http://package.elm-lang.org/packages/mdgriffith/stylish-elephants/latest
+[elm-ui]: https://package.elm-lang.org/packages/mdgriffith/elm-ui/latest/
 
 -}
 element : Int -> Element msg
 element =
-    html >> E.html
+    html >> Element.html
 
 
 
@@ -82,7 +82,7 @@ shift =
 points : List ( Float, Float ) -> String
 points list =
     list
-        |> List.map (\( fst, snd ) -> toString fst ++ "," ++ toString snd)
+        |> List.map (\( fst, snd ) -> String.fromFloat fst ++ "," ++ String.fromFloat snd)
         |> String.join " "
 
 
@@ -90,8 +90,8 @@ points list =
 -}
 attrs : Int -> List (Svg.Attribute msg)
 attrs width =
-    [ SvgA.width <| toString width
-    , SvgA.viewBox <| "0 0 " ++ toString size ++ " " ++ toString size
+    [ SvgAttrs.width <| String.fromInt width
+    , SvgAttrs.viewBox <| "0 0 " ++ String.fromFloat size ++ " " ++ String.fromFloat size
     ]
 
 
@@ -100,8 +100,8 @@ attrs width =
 group : List (Svg msg)
 group =
     [ Svg.polygon
-        [ SvgA.fill "#5A6378"
-        , SvgA.points <|
+        [ SvgAttrs.fill "#5A6378"
+        , SvgAttrs.points <|
             points
                 [ ( 0, shift )
                 , ( size / 2 - shift, size / 2 )
@@ -110,8 +110,8 @@ group =
         ]
         []
     , Svg.polygon
-        [ SvgA.fill "#7FD13B"
-        , SvgA.points <|
+        [ SvgAttrs.fill "#7FD13B"
+        , SvgAttrs.points <|
             points
                 [ ( shift, 0 )
                 , ( size / 4 + shift - distance, size / 4 - distance )
@@ -121,8 +121,8 @@ group =
         ]
         []
     , Svg.polygon
-        [ SvgA.fill "#F0AD00"
-        , SvgA.points <|
+        [ SvgAttrs.fill "#F0AD00"
+        , SvgAttrs.points <|
             points
                 [ ( size / 4 + shift + distance, size / 4 + distance )
                 , ( size * 3 / 4 - shift - distance, size / 4 + distance )
@@ -131,8 +131,8 @@ group =
         ]
         []
     , Svg.polygon
-        [ SvgA.fill "#60B5CC"
-        , SvgA.points <|
+        [ SvgAttrs.fill "#60B5CC"
+        , SvgAttrs.points <|
             points
                 [ ( size / 2 + shift, 0 )
                 , ( size, 0 )
@@ -141,8 +141,8 @@ group =
         ]
         []
     , Svg.polygon
-        [ SvgA.fill "#F0AD00"
-        , SvgA.points <|
+        [ SvgAttrs.fill "#F0AD00"
+        , SvgAttrs.points <|
             points
                 [ ( size, size / 2 + shift )
                 , ( size * 3 / 4 + shift, size * 3 / 4 )
@@ -151,8 +151,8 @@ group =
         ]
         []
     , Svg.polygon
-        [ SvgA.fill "#60B5CC"
-        , SvgA.points <|
+        [ SvgAttrs.fill "#60B5CC"
+        , SvgAttrs.points <|
             points
                 [ ( shift, size )
                 , ( size / 2, size / 2 + shift )
@@ -161,8 +161,8 @@ group =
         ]
         []
     , Svg.polygon
-        [ SvgA.fill "#7FD13B"
-        , SvgA.points <|
+        [ SvgAttrs.fill "#7FD13B"
+        , SvgAttrs.points <|
             points
                 [ ( size / 2 + shift, size / 2 )
                 , ( size * 3 / 4, size / 4 + shift )
